@@ -198,11 +198,10 @@ class Music(commands.Cog):
         await player.stop()
         await ctx.send('No worries, i\'ll stop playing for now')
 
-    # @commands.command(aliases=['queue', 'q', 'ls'])
-    # async def list(self, ctx, *, query: str):
-    #     player = self.bot.lavalink.player_manager.get(ctx.guild.id)
-    #     pages = paginate.Page(player.queue, page=int(query), items_per_page=10)
-    #     await ctx.send("```nim" + "\n".join(['', '\nNow Playing: ' + player.current.title, '', '-'*25, ''] + ["".join(str(x[0]+1) + ") " + x[1].title) for x in enumerate(player.queue)]) + "```")
+    @commands.command(aliases=['queue', 'q', 'ls'])
+    async def list(self, ctx, *, query: str):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        await ctx.send("```nim" + "\n".join(['', '\nNow Playing: ' + player.current.title, '', '-'*25, ''] + ["".join(str(x[0]+1) + ") " + x[1].title) for x in enumerate(player.queue)]) + "```")
 
     @commands.command(aliases=['dc', 'disconnect'])
     async def leave(self, ctx):
